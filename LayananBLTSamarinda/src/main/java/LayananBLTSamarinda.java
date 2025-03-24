@@ -1,32 +1,12 @@
 import java.util.ArrayList;
 import java.util.Scanner;
 
-class PenerimaBantuan {
-    String nama;
-    String nik;
-    String alamat;
-
-    public PenerimaBantuan(String nama, String nik, String alamat) {
-        this.nama = nama;
-        this.nik = nik;
-        this.alamat = alamat;
-    }
-
-    public void tampilkanData() {
-        System.out.println("Nama   : " + nama);
-        System.out.println("NIK    : " + nik);
-        System.out.println("Alamat : " + alamat);
-        System.out.println("---------------------------------------------");
-    }
-}
-
 public class LayananBLTSamarinda {
     static ArrayList<PenerimaBantuan> daftarPenerima = new ArrayList<>();
     static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
         int pilihan;
-
         do {
             System.out.println("\n===== Layanan Penerimaan Bantuan Langsung Tunai Pemerintah Kota Samarinda =====");
             System.out.println("|1. Tambahkan Data Penerima Bantuan                                           |");
@@ -37,7 +17,7 @@ public class LayananBLTSamarinda {
             System.out.println("===============================================================================");
             System.out.print("Pilihan Anda: ");
             pilihan = input.nextInt();
-            input.nextLine(); 
+            input.nextLine();
 
             switch (pilihan) {
                 case 1:
@@ -53,12 +33,11 @@ public class LayananBLTSamarinda {
                     editData();
                     break;
                 case 5:
-                    System.out.println("Terima kasih! Program selesai.");
+                    System.out.println("Terima kasih telah menggunakan layanan ini.");
                     break;
                 default:
-                    System.out.println("Pilihan tidak valid. Silakan coba lagi.");
+                    System.out.println("Pilihan tidak valid.");
             }
-
         } while (pilihan != 5);
     }
 
@@ -72,17 +51,19 @@ public class LayananBLTSamarinda {
 
         PenerimaBantuan penerima = new PenerimaBantuan(nama, nik, alamat);
         daftarPenerima.add(penerima);
-        System.out.println("Data berhasil ditambahkan!");
+        System.out.println("Data berhasil ditambahkan.");
     }
 
     static void lihatData() {
+        System.out.println("\n== Daftar Penerima Bantuan ==");
         if (daftarPenerima.isEmpty()) {
-            System.out.println("Belum ada data penerima bantuan.");
+            System.out.println("Belum ada data.");
         } else {
-            System.out.println("\n========== Daftar Penerima Bantuan ==========");
-            for (int i = 0; i < daftarPenerima.size(); i++) {
-                System.out.println("Data ke-" + (i + 1));
-                daftarPenerima.get(i).tampilkanData();
+            int i = 1;
+            for (PenerimaBantuan p : daftarPenerima) {
+                System.out.println("No. " + i);
+                p.tampilkanData();
+                i++;
             }
         }
     }
@@ -91,15 +72,15 @@ public class LayananBLTSamarinda {
         lihatData();
         if (daftarPenerima.isEmpty()) return;
 
-        System.out.print("Masukkan nomor data yang akan dihapus: ");
+        System.out.print("Masukkan nomor data yang ingin dihapus: ");
         int index = input.nextInt();
-        input.nextLine(); 
+        input.nextLine();
 
         if (index >= 1 && index <= daftarPenerima.size()) {
             daftarPenerima.remove(index - 1);
             System.out.println("Data berhasil dihapus.");
         } else {
-            System.out.println("Nomor data tidak valid.");
+            System.out.println("Nomor tidak valid.");
         }
     }
 
@@ -109,26 +90,26 @@ public class LayananBLTSamarinda {
 
         System.out.print("Masukkan nomor data yang akan diedit: ");
         int index = input.nextInt();
-        input.nextLine(); 
+        input.nextLine();
 
         if (index >= 1 && index <= daftarPenerima.size()) {
             PenerimaBantuan penerima = daftarPenerima.get(index - 1);
 
-            System.out.println("Masukkan data baru (biarkan kosong jika tidak ingin mengubah):");
-            System.out.print("Nama lama: " + penerima.nama + ", Nama baru: ");
+            System.out.println("Masukkan data baru (kosongkan jika tidak ingin mengubah):");
+            System.out.print("Nama lama: " + penerima.getNama() + " | Nama baru: ");
             String namaBaru = input.nextLine();
-            System.out.print("NIK lama: " + penerima.nik + ", NIK baru: ");
+            System.out.print("NIK lama: " + penerima.getNik() + " | NIK baru: ");
             String nikBaru = input.nextLine();
-            System.out.print("Alamat lama: " + penerima.alamat + ", Alamat baru: ");
+            System.out.print("Alamat lama: " + penerima.getAlamat() + " | Alamat baru: ");
             String alamatBaru = input.nextLine();
 
-            if (!namaBaru.isEmpty()) penerima.nama = namaBaru;
-            if (!nikBaru.isEmpty()) penerima.nik = nikBaru;
-            if (!alamatBaru.isEmpty()) penerima.alamat = alamatBaru;
+            if (!namaBaru.isEmpty()) penerima.setNama(namaBaru);
+            if (!nikBaru.isEmpty()) penerima.setNik(nikBaru);
+            if (!alamatBaru.isEmpty()) penerima.setAlamat(alamatBaru);
 
             System.out.println("Data berhasil diperbarui.");
         } else {
-            System.out.println("Nomor data tidak valid.");
+            System.out.println("Nomor tidak valid.");
         }
     }
 }
