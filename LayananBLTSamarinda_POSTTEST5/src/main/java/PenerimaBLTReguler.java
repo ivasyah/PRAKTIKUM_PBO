@@ -1,0 +1,35 @@
+public class PenerimaBLTReguler extends PenerimaBantuan {
+    private double jumlahBantuan;
+
+    public PenerimaBLTReguler(String nik, String nama, String alamat, double jumlahBantuan) {
+        super(nik, nama, alamat);
+        this.jumlahBantuan = jumlahBantuan;
+    }
+
+    public double getJumlahBantuan() {
+        return jumlahBantuan;
+    }
+
+    public void setJumlahBantuan(double jumlahBantuan) {
+        this.jumlahBantuan = jumlahBantuan;
+    }
+
+    @Override
+    public void tampilkanData() {
+        super.tampilkanData();
+        System.out.println("Jenis   : BLT Reguler");
+        System.out.println("Jumlah  : Rp" + jumlahBantuan);
+        System.out.println("---------------------------");
+    }
+
+    @Override
+    public String getKategori() {
+        return "Reguler";
+    }
+
+    @Override
+    public void tampilkanData(String header) {
+        System.out.println("======================== " + header + " (Reguler) ========================");
+        super.tampilkanData(); 
+    }
+}
